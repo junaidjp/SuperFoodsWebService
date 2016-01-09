@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/SuperFoodsService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SuperFoodsService" targetNamespace="http://www.example.org/SuperFoodsService/">
+  <wsdl:types>
+   <xsd:schema targetNamespace="http://www.example.org/SuperFoodsService/">
+        
+         <xsd:element name="getSuperFoodList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+      <xsd:element name="getSuperFoodListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  
+  
+  <wsdl:message name="getSuperFoodListRequest">
+    <wsdl:part element="tns:getSuperFoodList" name="parameters"/>
+  </wsdl:message>
+  
+  <wsdl:message name="getSuperFoodListResponse">
+    <wsdl:part element="tns:getSuperFoodListResponse" name="parameters"/>
+  </wsdl:message>
+  
+  <wsdl:portType name="SuperFoodsService">
+    <wsdl:operation name="getSuperFoodList">
+      <wsdl:input message="tns:getSuperFoodListRequest"/>
+      <wsdl:output message="tns:getSuperFoodListResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <wsdl:binding name="SuperFoodsServiceSOAP" type="tns:SuperFoodsService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getSuperFoodList">
+      <soap:operation soapAction="http://www.example.org/SuperFoodsService/getSuperFoodList"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SuperFoodsService">
+    <wsdl:port binding="tns:SuperFoodsServiceSOAP" name="SuperFoodsServiceSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
